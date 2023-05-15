@@ -4,6 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Unfortunately, {@link ObjectMapper} exposes APIs that allow unsuspecting users to change the config
+ * of that mapper and if it is used by other code, then that code could be affected by the changes.
+ */
 public class ImmutableObjectMapper {
 
   private final ObjectMapper objectMapper;
