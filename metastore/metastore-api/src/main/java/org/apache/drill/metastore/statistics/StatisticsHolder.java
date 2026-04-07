@@ -22,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import org.apache.drill.common.util.ImmutableObjectMapper;
+import org.apache.drill.common.util.ImmutableObjectReader;
+import org.apache.drill.common.util.ImmutableObjectWriter;
 import org.apache.drill.common.util.JacksonUtils;
 
 import java.io.IOException;
@@ -39,9 +39,11 @@ import java.util.StringJoiner;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class StatisticsHolder<T> {
 
-  private static final ObjectMapper OBJECT_MAPPER = JacksonUtils.createObjectMapper();
-  private static final ObjectWriter OBJECT_WRITER = OBJECT_MAPPER.writerFor(StatisticsHolder.class);
-  private static final ObjectReader OBJECT_READER = OBJECT_MAPPER.readerFor(StatisticsHolder.class);
+  private static final ImmutableObjectMapper OBJECT_MAPPER = JacksonUtils.getInstance();
+  private static final ImmutableObjectWriter OBJECT_WRITER =
+      OBJECT_MAPPER.writerFor(StatisticsHolder.class);
+  private static final ImmutableObjectReader OBJECT_READER =
+      OBJECT_MAPPER.readerFor(StatisticsHolder.class);
 
   private final T statisticsValue;
   private final BaseStatisticsKind<?> statisticsKind;

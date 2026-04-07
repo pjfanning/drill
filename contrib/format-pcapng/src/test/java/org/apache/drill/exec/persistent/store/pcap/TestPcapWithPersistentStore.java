@@ -61,7 +61,6 @@ public class TestPcapWithPersistentStore extends TestWithZookeeper {
             PersistentStoreConfig<FileSystemConfig> storeConfig =
                     PersistentStoreConfig.newJacksonBuilder(testMapper, FileSystemConfig.class).name("type").build();
 
-
             try (ZookeeperClient zkClient = new ZookeeperClient(curator,
                     PathUtils.join("/", storeConfig.getName()), CreateMode.PERSISTENT)) {
                 zkClient.start();

@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
  */
 public final class JacksonUtils {
 
+  private static final ImmutableObjectMapper INSTANCE = new ImmutableObjectMapper(createObjectMapper());
   private JacksonUtils() {}
 
   /**
@@ -60,5 +61,9 @@ public final class JacksonUtils {
    */
   public static JsonMapper.Builder createJsonMapperBuilder(final JsonFactory factory) {
     return JsonMapper.builder(factory);
+  }
+
+  public static ImmutableObjectMapper getInstance() {
+    return INSTANCE;
   }
 }
